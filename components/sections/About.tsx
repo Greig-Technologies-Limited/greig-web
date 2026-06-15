@@ -24,7 +24,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="about" className="section-pad bg-charcoal-900 relative overflow-hidden">
+    <section id="about" className="section-pad bg-slate-900 relative overflow-hidden">
       <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full"
         style={{ background: "radial-gradient(circle, rgba(58,158,63,0.05) 0%, transparent 70%)" }} />
       <div className="max-w-7xl mx-auto px-6">
@@ -54,7 +54,7 @@ export default function About() {
                 <motion.div key={m.year} className="relative"
                   initial={{ opacity: 0, x: -16 }} animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + i * 0.1 }}>
-                  <div className="absolute -left-[1.65rem] w-3 h-3 rounded-full bg-charcoal-900"
+                  <div className="absolute -left-[1.65rem] w-3 h-3 rounded-full bg-slate-900"
                     style={{ border: "2px solid rgba(58,158,63,0.45)" }} />
                   <span className="text-greig-green text-xs font-semibold tracking-widest"
                     style={{ fontFamily: "var(--font-mono)" }}>{m.year}</span>

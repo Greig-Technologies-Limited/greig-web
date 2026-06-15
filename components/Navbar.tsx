@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import GlobeIcon from "./icons/GlobeIcon";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services",   href: "#services" },
@@ -33,35 +33,32 @@ export default function Navbar() {
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-charcoal-950/95 backdrop-blur-md border-b border-greig-green/10 py-3"
-            : "bg-transparent py-5"
+            ? "backdrop-blur-md border-b py-2"
+            : "bg-transparent py-4"
         }`}
+        style={scrolled ? {
+          background: "rgba(26,31,26,0.95)",
+          borderColor: "rgba(58,158,63,0.12)"
+        } : {}}
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
-          {/* ── Logo ── */}
+          {/* ── Logo — actual image ── */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-3 group"
+            className="flex items-center group"
           >
-            <GlobeIcon size={36} className="flex-shrink-0" />
-            <div className="flex flex-col leading-none">
-              <span
-                className="font-bold text-white text-[15px] tracking-widest uppercase"
-                style={{ fontFamily: "var(--font-display)", letterSpacing: "0.18em" }}
-              >
-                GREIG
-              </span>
-              <span
-                className="text-silver text-[9px] tracking-[0.22em] uppercase"
-                style={{ fontFamily: "var(--font-mono)" }}
-              >
-                Technologies Limited
-              </span>
-            </div>
+            <Image
+              src="/greig-logo.jpg"
+              alt="Greig Technologies Limited"
+              width={180}
+              height={52}
+              className="h-12 w-auto object-contain"
+              priority
+            />
           </button>
 
           {/* ── Desktop Nav ── */}
@@ -79,8 +76,10 @@ export default function Navbar() {
             ))}
             <button
               onClick={() => handleNav("#contact")}
-              className="ml-2 px-4 py-2 rounded-md bg-greig-green text-white text-sm font-semibold hover:bg-greig-green-mid transition-all duration-200"
-              style={{ fontFamily: "var(--font-body)" }}
+              className="ml-2 px-4 py-2 rounded-md text-white text-sm font-semibold transition-all duration-200"
+              style={{ background: "#3a9e3f", fontFamily: "var(--font-body)" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#2d7d31")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#3a9e3f")}
             >
               Get Connected
             </button>
@@ -105,39 +104,38 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
           >
-            <div
-              className="absolute inset-0 bg-charcoal-950/80 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
-            />
+            <div className="absolute inset-0 backdrop-blur-sm"
+              style={{ background: "rgba(26,31,26,0.85)" }}
+              onClick={() => setOpen(false)} />
             <motion.nav
-              className="absolute top-0 right-0 h-full w-72 bg-charcoal-900 border-l border-greig-green/10 flex flex-col pt-20 px-8 gap-2"
+              className="absolute top-0 right-0 h-full w-72 flex flex-col pt-20 px-8 gap-2"
+              style={{ background: "#222722", borderLeft: "1px solid rgba(58,158,63,0.12)" }}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
+              <div className="mb-4">
+                <Image src="/greig-logo.jpg" alt="Greig Technologies Limited"
+                  width={140} height={40} className="h-10 w-auto object-contain" />
+              </div>
               {navLinks.map((link, i) => (
-                <motion.button
-                  key={link.label}
-                  onClick={() => handleNav(link.href)}
-                  className="text-left py-3 text-silver hover:text-white border-b border-white/5 transition-colors text-base"
+                <motion.button key={link.label} onClick={() => handleNav(link.href)}
+                  className="text-left py-3 text-silver hover:text-white text-base transition-colors"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
                   initial={{ x: 40, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.06 }}
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
+                  transition={{ delay: i * 0.06 }}>
                   {link.label}
                 </motion.button>
               ))}
-              <motion.button
-                onClick={() => handleNav("#contact")}
-                className="mt-6 py-3 px-4 rounded-md bg-greig-green text-white font-semibold text-sm hover:bg-greig-green-mid transition-colors"
+              <motion.button onClick={() => handleNav("#contact")}
+                className="mt-6 py-3 px-4 rounded-md text-white font-semibold text-sm"
+                style={{ background: "#3a9e3f" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 }}
-              >
+                transition={{ delay: 0.35 }}>
                 Get Connected
               </motion.button>
             </motion.nav>

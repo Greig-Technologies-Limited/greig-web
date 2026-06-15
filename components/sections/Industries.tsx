@@ -18,7 +18,7 @@ export default function Industries() {
   const inView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="industries" className="section-pad bg-charcoal-900 relative overflow-hidden">
+    <section id="industries" className="section-pad bg-slate-900 relative overflow-hidden">
       <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full"
         style={{ background: "radial-gradient(circle, rgba(58,158,63,0.06) 0%, transparent 70%)" }} />
       <div className="max-w-7xl mx-auto px-6">

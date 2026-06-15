@@ -14,6 +14,9 @@ env:
   NODE_VERSION: "20"
 
 jobs:
+  # ────────────────────────────────────────────────────
+  # JOB 1 — Secret Detection (free CLI, no license needed)
+  # ────────────────────────────────────────────────────
   secret-scan:
     name: "🔐 Secret Detection (Gitleaks CLI)"
     runs-on: ubuntu-latest
@@ -32,6 +35,9 @@ jobs:
       - name: Run Gitleaks
         run: gitleaks detect --source . --log-opts="--all" --verbose
 
+  # ────────────────────────────────────────────────────
+  # JOB 2 — SAST (Semgrep)
+  # ────────────────────────────────────────────────────
   sast:
     name: "🔍 SAST (Semgrep)"
     runs-on: ubuntu-latest
@@ -41,6 +47,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Semgrep Scan
         uses: returntocorp/semgrep-action@v1
         with:
@@ -53,41 +60,78 @@ jobs:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
         continue-on-error: true
 
+  # ────────────────────────────────────────────────────
+  # JOB 3 — Dependency Audit
+  # ────────────────────────────────────────────────────
   dependency-audit:
     name: "📦 Dependency Audit"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm audit --audit-level=high
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: npm audit
+        run: npm audit --audit-level=high
         continue-on-error: true
 
+      - name: Snyk scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+        continue-on-error: true
+
+  # ────────────────────────────────────────────────────
+  # JOB 4 — Lint, Type-check & Build
+  # ────────────────────────────────────────────────────
   build:
     name: "🔨 Lint, Typecheck & Build"
     runs-on: ubuntu-latest
     needs: [secret-scan]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
-      - run: npm ci
-      - run: npm run lint
-      - run: npx tsc --noEmit
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ESLint
+        run: npm run lint
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Build (static export)
+        run: npm run build
         env:
           NODE_ENV: production
-      - uses: actions/upload-artifact@v4
+
+      - name: Upload static export artifact
+        uses: actions/upload-artifact@v4
         with:
           name: static-export
           path: out/
           retention-days: 1
 
+  # ────────────────────────────────────────────────────
+  # JOB 5 — Deploy to Cloudflare Pages
+  # ────────────────────────────────────────────────────
   deploy:
     name: "🚀 Deploy → Cloudflare Pages"
     runs-on: ubuntu-latest
@@ -99,12 +143,17 @@ jobs:
     environment:
       name: production
       url: https://www.greigtechnologies.com
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download static export
+        uses: actions/download-artifact@v4
         with:
           name: static-export
           path: out/
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
@@ -114,3 +163,10 @@ jobs:
           directory: out
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: "3"
+
+      - name: Deployment summary
+        run: |
+          echo "### ✅ Deployed to Cloudflare Pages" >> $GITHUB_STEP_SUMMARY
+          echo "Branch: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "URL: https://www.greigtechnologies.com" >> $GITHUB_STEP_SUMMARY

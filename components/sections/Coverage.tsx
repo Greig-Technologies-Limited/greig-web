@@ -6,15 +6,16 @@ import { MapPin } from "lucide-react";
 
 const REGIONS = [
   { name: "Nigeria",             detail: "Lagos HQ · Abuja · Port Harcourt", primary: true },
-  { name: "West Africa",         detail: "Ghana · Benin · Cameroon · Senegal" },
+  { name: "West Africa",         detail: "Ghana · Ivory Coast · Liberia · Cameroon · Senegal" },
   { name: "Offshore West Africa",detail: "Gulf of Guinea · Bight of Benin" },
   { name: "Indian Ocean",        detail: "Remote monitoring & VSAT support" },
 ];
 
 const BANDS = [
-  { name: "Ku-Band", freq: "12–18 GHz", use: "Enterprise & Maritime broadband" },
-  { name: "Ka-Band", freq: "26–40 GHz", use: "High-throughput VSAT" },
-  { name: "C-Band",  freq: "4–8 GHz",  use: "Weather-resilient remote sites" },
+  { name: "Ku-Band",    freq: "12–18 GHz",  use: "Enterprise & Maritime broadband" },
+  { name: "C-Band",     freq: "4–8 GHz",    use: "Weather-resilient remote sites" },
+  { name: "Amazon LEO", freq: "Low Orbit",  use: "High-speed low-latency LEO" },
+  { name: "Starlink",   freq: "LEO/VLEO",   use: "Global broadband coverage" },
 ];
 
 export default function Coverage() {
@@ -22,7 +23,7 @@ export default function Coverage() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="coverage" className="section-pad bg-charcoal-950 relative overflow-hidden">
+    <section id="coverage" className="section-pad bg-slate-950 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -52,7 +53,7 @@ export default function Coverage() {
                 </motion.div>
               ))}
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {BANDS.map((band, i) => (
                 <motion.div key={band.name} className="glass rounded-lg p-3"
                   initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}

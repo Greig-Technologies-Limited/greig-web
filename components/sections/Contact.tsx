@@ -29,7 +29,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-pad bg-charcoal-950 relative overflow-hidden">
+    <section id="contact" className="section-pad bg-slate-950 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-30" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-greig-green/20" />
       <div className="relative max-w-7xl mx-auto px-6">
@@ -127,9 +127,9 @@ export default function Contact() {
                   <select id="service" name="service" value={form.service} onChange={handleChange}
                     className="w-full rounded-lg px-4 py-3 text-sm focus:outline-none transition-all"
                     style={{ background: "rgba(30,33,30,0.6)", border: "1px solid rgba(255,255,255,0.08)", color: form.service ? "white" : "#9eaaa0" }}>
-                    <option value="" style={{ background: "#1e211e" }}>Select a service…</option>
+                    <option value="" style={{ background: "#2c332c" }}>Select a service…</option>
                     {["VSAT Solutions","Maritime Communications","Enterprise Networking","Wireless Services","Managed Services","Other / Not Sure"].map(s => (
-                      <option key={s} value={s.toLowerCase().replace(/\s+/g,"-")} style={{ background: "#1e211e" }}>{s}</option>
+                      <option key={s} value={s.toLowerCase().replace(/\s+/g,"-")} style={{ background: "#2c332c" }}>{s}</option>
                     ))}
                   </select>
                 </div>

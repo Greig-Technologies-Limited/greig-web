@@ -147,10 +147,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-charcoal-950">
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: "#1a1f1a" }}>
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 60% 50%, rgba(58,158,63,0.08) 0%, transparent 70%)" }} />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-charcoal-950 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-950 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-28 pb-16 grid lg:grid-cols-2 gap-12 items-center">
 
@@ -281,7 +281,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-charcoal-950 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
     </section>
   );
 }

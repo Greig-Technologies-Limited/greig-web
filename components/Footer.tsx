@@ -1,6 +1,7 @@
 "use client";
 
-import GlobeIcon from "./icons/GlobeIcon";
+import Image from "next/image";
+
 
 const LINKS = {
   Services: ["VSAT Solutions", "Maritime Comms", "Enterprise Networking", "Wireless Services", "Managed Services", "Network Security"],
@@ -10,18 +11,13 @@ const LINKS = {
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-charcoal-950" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+    <footer className="bg-slate-950" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <GlobeIcon size={36} />
-              <div>
-                <span className="font-bold text-white text-sm tracking-widest uppercase block"
-                  style={{ fontFamily: "var(--font-display)", letterSpacing: "0.18em" }}>GREIG TECHNOLOGIES</span>
-                <span className="text-silver text-[10px] tracking-[0.22em] uppercase"
-                  style={{ fontFamily: "var(--font-mono)" }}>Limited</span>
-              </div>
+              <Image src="/greig-logo.jpg" alt="Greig Technologies Limited" width={160} height={46} className="h-11 w-auto object-contain" />
+
             </div>
             <p className="text-silver text-sm leading-relaxed max-w-xs mb-4">
               Satellite, maritime, and enterprise connectivity solutions across West Africa. Established 2009.

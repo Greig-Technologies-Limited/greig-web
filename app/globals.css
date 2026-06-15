@@ -7,48 +7,37 @@
   --font-body:    'Inter', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
 
-  /* Brand tokens */
-  --green:       #3a9e3f;
-  --green-mid:   #2d7d31;
-  --green-dim:   #4caf50;
-  --green-pale:  #e8f5e9;
-  --charcoal-950: #0d0f0d;
-  --charcoal-900: #141614;
-  --charcoal-800: #1e211e;
-  --charcoal-700: #2a2e2a;
-  --silver:      #9eaaa0;
+  --green:        #3a9e3f;
+  --green-mid:    #2d7d31;
+  --green-dim:    #4caf50;
+  --slate-950:    #1a1f1a;
+  --slate-900:    #222722;
+  --slate-800:    #2c332c;
+  --silver:       #9eaaa0;
   --silver-light: #c8d4ca;
-  --white:       #ffffff;
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--charcoal-950);
-  color: #e8ede9;
+  background-color: var(--slate-950);
+  color: #dde8de;
   font-family: var(--font-body);
   overflow-x: hidden;
 }
 
-::selection {
-  background: rgba(58, 158, 63, 0.3);
-  color: #ffffff;
-}
-
+::selection { background: rgba(58,158,63,0.3); color: #fff; }
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--charcoal-900); }
-::-webkit-scrollbar-thumb { background: var(--silver-dark, #6a7870); border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--slate-900); }
+::-webkit-scrollbar-thumb { background: #6a7870; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--green); }
 
-/* ── Typography helpers ── */
 .font-display { font-family: var(--font-display); }
 .font-mono    { font-family: var(--font-mono); }
 
-/* ── Gradient text ── */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #6dcc72 40%, #3a9e3f 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #7dd87f 40%, #3a9e3f 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -61,51 +50,36 @@ body {
   background-clip: text;
 }
 
-/* ── Glass card ── */
+/* Lighter glass — more visible on dark slate */
 .glass {
-  background: rgba(30, 33, 30, 0.7);
+  background: rgba(44, 51, 44, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(58, 158, 63, 0.12);
+  border: 1px solid rgba(58,158,63,0.15);
 }
 
 .glass-hover {
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 .glass-hover:hover {
-  background: rgba(30, 33, 30, 0.9);
-  border-color: rgba(58, 158, 63, 0.28);
+  background: rgba(54, 61, 54, 0.9);
+  border-color: rgba(58,158,63,0.32);
 }
 
-/* ── Glow ── */
-.glow-green {
-  box-shadow: 0 0 24px rgba(58, 158, 63, 0.25), 0 0 60px rgba(58, 158, 63, 0.08);
-}
-.glow-text {
-  text-shadow: 0 0 24px rgba(58, 158, 63, 0.45);
-}
+.glow-text { text-shadow: 0 0 24px rgba(58,158,63,0.45); }
 
-/* ── Grid background ── */
 .bg-grid {
   background-image:
-    linear-gradient(rgba(58,158,63,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(58,158,63,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(58,158,63,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,158,63,0.05) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* ── Section spacing ── */
-.section-pad {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
+.section-pad { padding-top: 6rem; padding-bottom: 6rem; }
 @media (min-width: 1024px) {
-  .section-pad {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
-  }
+  .section-pad { padding-top: 8rem; padding-bottom: 8rem; }
 }
 
-/* ── Radar / pulse rings ── */
 @keyframes radar-ring {
   0%   { transform: scale(0.5); opacity: 0.7; }
   100% { transform: scale(2.5); opacity: 0; }
@@ -114,11 +88,7 @@ body {
 .radar-ring-2 { animation: radar-ring 2.8s ease-out 0.9s infinite; }
 .radar-ring-3 { animation: radar-ring 2.8s ease-out 1.8s infinite; }
 
-/* ── Typewriter cursor ── */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 .cursor::after {
   content: '|';
   animation: blink 1s step-end infinite;
@@ -126,13 +96,6 @@ body {
   margin-left: 2px;
 }
 
-/* ── Node pulse on globe ── */
-@keyframes node-pulse {
-  0%, 100% { r: 3; opacity: 0.9; }
-  50%       { r: 5; opacity: 0.4; }
-}
-
-/* ── Reduce motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

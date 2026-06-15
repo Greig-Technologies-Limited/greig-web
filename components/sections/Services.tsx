@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Satellite, Ship, Network, Server, Radio, Wifi, Shield, Headphones } from "lucide-react";
 
 const SERVICES = [
-  { icon: Satellite,  title: "VSAT Solutions",        description: "Ku, Ka, and C-band VSAT connectivity for remote sites, enterprises, and offshore platforms with high uptime SLAs.", highlight: true,  band: "Ku · Ka · C" },
+  { icon: Satellite,  title: "VSAT Solutions",        description: "Ku, C-band VSAT plus next-gen LEO solutions including Starlink and Amazon Kuiper — for remote sites, enterprises, and offshore platforms.", highlight: true,  band: "Ku · Ka · C" },
   { icon: Ship,       title: "Maritime Communications",description: "Marine stabilized antenna systems and offshore satellite services for vessels operating across West African waters.", highlight: false, band: "Marine · Offshore" },
   { icon: Network,    title: "Enterprise Networking",  description: "End-to-end WAN design, cabling, fibre optics, and network consulting for enterprises and institutions.",            highlight: false, band: "LAN · WAN · Fibre" },
   { icon: Wifi,       title: "Wireless Services",      description: "Licensed wireless broadband services including last-mile delivery for business parks and campuses.",                highlight: false, band: "Broadband · Wireless" },
@@ -58,7 +58,7 @@ export default function Services() {
   const inView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="section-pad bg-charcoal-950 relative">
+    <section id="services" className="section-pad bg-slate-950 relative">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-greig-green/20" />
       <div className="max-w-7xl mx-auto px-6">
         <motion.div ref={titleRef} className="mb-16 max-w-2xl"
