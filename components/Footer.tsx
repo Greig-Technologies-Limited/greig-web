@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <Image src="/greig-logo.png" alt="Greig Technologies Limited" width={160} height={46} className="h-11 w-auto object-contain" />
+              <Image src="/greig-logo.svg" alt="Greig Technologies Limited" width={160} height={46} className="h-11 w-auto object-contain" />
 
             </div>
             <p className="text-silver text-sm leading-relaxed max-w-xs mb-4">

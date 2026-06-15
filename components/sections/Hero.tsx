@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Satellite, Wifi, Globe } from "lucide-react";
+import { ArrowRight, Satellite, Wifi, Globe, Radio } from "lucide-react";
 
 const STATS = [
   { value: "15+", label: "Years of Operation" },
@@ -262,9 +262,10 @@ export default function Hero() {
           <canvas ref={canvasRef} className="w-full max-w-[420px] aspect-square" style={{ maxHeight: 420 }} />
 
           {[
-            { icon: Satellite, label: "VSAT",      pos: "top-4 left-8" },
-            { icon: Globe,     label: "Amazon LEO",   pos: "top-4 right-8" },
-            { icon: Wifi,      label: "Starlink",pos: "bottom-12 left-0" },
+            { icon: Satellite, label: "VSAT",        pos: "top-4 left-8" },
+            { icon: Globe,     label: "Amazon LEO",  pos: "top-4 right-8" },
+            { icon: Wifi,      label: "Starlink",     pos: "bottom-12 left-0" },
+            { icon: Radio,     label: "LTE Backup",   pos: "bottom-12 right-0" },
           ].map(({ icon: Icon, label, pos }, i) => (
             <motion.div
               key={label}

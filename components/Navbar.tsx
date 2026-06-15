@@ -52,7 +52,7 @@ export default function Navbar() {
             className="flex items-center group"
           >
             <Image
-              src="/greig-logo.png"
+              src="/greig-logo.svg"
               alt="Greig Technologies Limited"
               width={180}
               height={52}
@@ -117,7 +117,7 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               <div className="mb-4">
-                <Image src="/greig-logo.png" alt="Greig Technologies Limited"
+                <Image src="/greig-logo.svg" alt="Greig Technologies Limited"
                   width={140} height={40} className="h-10 w-auto object-contain" />
               </div>
               {navLinks.map((link, i) => (
