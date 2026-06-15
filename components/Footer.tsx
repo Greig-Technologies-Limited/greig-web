@@ -44,7 +44,7 @@ export default function Footer() {
               className="text-steel/50 text-xs"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              16 Amore Street, Ikeja, Lagos, Nigeria.
+              10 Anuoluwapo Close, Opebi, Ikeja, Lagos, Nigeria.
             </p>
           </div>
 

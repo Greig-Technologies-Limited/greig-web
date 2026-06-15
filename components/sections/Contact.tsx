@@ -18,7 +18,7 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     label: "Address",
-    values: ["No. 16 Amore Street, off Toyin Street,", "Ikeja, Lagos, Nigeria"],
+    values: ["10 Anuoluwapo Close, Opebi,", "Ikeja, Lagos State, Nigeria"],
   },
 ];
 

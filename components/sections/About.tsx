@@ -148,9 +148,9 @@ export default function About() {
                     Headquarters
                   </div>
                   <p className="text-steel text-sm">
-                    No. 16 Amore Street, off Toyin Street,
+                    10 Anuoluwapo Close, Opebi,
                     <br />
-                    Ikeja, Lagos, Nigeria.
+                    Ikeja, Lagos State, Nigeria.
                   </p>
                 </div>
               </div>
