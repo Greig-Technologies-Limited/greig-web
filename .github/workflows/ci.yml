@@ -15,10 +15,10 @@ env:
 
 jobs:
   # ────────────────────────────────────────────────────
-  # JOB 1 — Secret Detection
+  # JOB 1 — Secret Detection (free CLI, no license needed)
   # ────────────────────────────────────────────────────
   secret-scan:
-    name: "🔐 Secret Detection (Gitleaks)"
+    name: "🔐 Secret Detection (Gitleaks CLI)"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,13 +26,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install Gitleaks
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz \
+            | tar -xz -C /usr/local/bin gitleaks
+          gitleaks version
+
       - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gitleaks detect --source . --log-opts="--all" --verbose
 
   # ────────────────────────────────────────────────────
-  # JOB 2 — SAST
+  # JOB 2 — SAST (Semgrep)
   # ────────────────────────────────────────────────────
   sast:
     name: "🔍 SAST (Semgrep)"
@@ -118,7 +122,6 @@ jobs:
         env:
           NODE_ENV: production
 
-      # Cache the `out/` directory for the deploy job
       - name: Upload static export artifact
         uses: actions/upload-artifact@v4
         with:
@@ -128,7 +131,6 @@ jobs:
 
   # ────────────────────────────────────────────────────
   # JOB 5 — Deploy to Cloudflare Pages
-  #          Runs only on push to main after build passes
   # ────────────────────────────────────────────────────
   deploy:
     name: "🚀 Deploy → Cloudflare Pages"
@@ -157,8 +159,8 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: greig-web          # must match your CF Pages project name
-          directory: out                  # static export output directory
+          projectName: greig-web
+          directory: out
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerVersion: "3"
 
