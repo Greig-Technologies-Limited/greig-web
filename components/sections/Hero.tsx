@@ -263,8 +263,8 @@ export default function Hero() {
 
           {[
             { icon: Satellite, label: "VSAT",      pos: "top-4 left-8" },
-            { icon: Globe,     label: "Ka-Band",   pos: "top-4 right-8" },
-            { icon: Wifi,      label: "LTE Backup",pos: "bottom-12 left-0" },
+            { icon: Globe,     label: "Amazon LEO",   pos: "top-4 right-8" },
+            { icon: Wifi,      label: "Starlink",pos: "bottom-12 left-0" },
           ].map(({ icon: Icon, label, pos }, i) => (
             <motion.div
               key={label}
